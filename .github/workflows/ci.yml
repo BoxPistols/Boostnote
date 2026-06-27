@@ -25,6 +25,12 @@ jobs:
         with:
           node-version: '14.21.3'
 
+      - name: Rewrite git:// to https://
+        # A transitive dependency (eve, via Raphael/snap.svg) is referenced
+        # over the unauthenticated git:// protocol, which GitHub disabled in
+        # 2022. Rewriting to https:// lets the install resolve it.
+        run: git config --global url."https://github.com/".insteadOf "git://github.com/"
+
       - name: Install dependencies
         # package-lock.json is gitignored and yarn.lock is the tracked
         # lockfile, so `npm ci` has no lockfile to read on a clean checkout.
