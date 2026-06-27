@@ -43,6 +43,27 @@ npm run server          # terminal A: Hocuspocus on ws://127.0.0.1:1234
 npm run dev             # terminal B: Vite; open the URL in TWO windows and type
 ```
 
+## Deploy / distribution / operations
+
+This PoC's server is the seed of the production sync service.
+
+- **Sync server (Hocuspocus):** one always-on Node service on a small VPS (or
+  container), behind a TLS reverse proxy (Caddy/Traefik), managed by `systemd`
+  (auto-restart). One process suffices for single-user / few-room use.
+- **Persistence:** this PoC writes only a `.cson` snapshot. Production must also
+  persist the **Yjs update log** (Hocuspocus `Database` extension → SQLite/
+  Postgres) so undo/history survive restarts. Back up **both** the DB and the
+  `snapshots/` dir nightly; keep snapshots in the user's notes folder so they
+  stay git/Dropbox/iCloud-friendly.
+- **Auth:** replace the demo token with a **per-device pairing token** (issued at
+  pairing, verified in `onAuthenticate`); never ship a hardcoded secret. Store it
+  in Electron `safeStorage` (main process), not renderer `localStorage`.
+- **App distribution:** Electron auto-update (`electron-updater`) with **signed +
+  notarized** macOS (dmg/zip) and Windows (nsis) artifacts built in CI.
+- **Cost shape:** flat ~$5–12/mo VPS, no per-user/per-connection fees.
+- **Resilience:** the desktop app keeps working offline via `y-indexeddb`, so a
+  server outage degrades to local-only — not data loss.
+
 ## Notes / next
 
 - The PoC persists only a `.cson` **snapshot**; production should also persist the
