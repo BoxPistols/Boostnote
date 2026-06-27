@@ -26,7 +26,11 @@ jobs:
           node-version: '14.21.3'
 
       - name: Install dependencies
-        run: npm ci
+        # package-lock.json is gitignored and yarn.lock is the tracked
+        # lockfile, so `npm ci` has no lockfile to read on a clean checkout.
+        # Use `npm install` (the historical Travis behaviour) to resolve
+        # from package.json directly.
+        run: npm install --no-audit --no-fund
 
       - name: Lint
         run: npm run lint
