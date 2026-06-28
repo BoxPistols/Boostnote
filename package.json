@@ -5,7 +5,9 @@
   "main": "index.js",
   "description": "The Boosters — a modernized, independent successor to Boostnote (originally © BoostIO, GPL-3.0)",
   "license": "GPL-3.0",
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
+    "postinstall": "node node_modules/electron/install.js",
     "start": "electron ./index.js",
     "compile": "grunt compile",
     "test": "npm run ava && npm run jest",

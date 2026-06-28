@@ -42,10 +42,10 @@
 > **Apple Silicon について**: モダンアプリ（`app/`）は **arm64 ネイティブ**です。一方レガシー本体は **Electron 4.2.12 に arm64 ビルドが存在しない**ため（arm64 対応は Electron 11+）、ネイティブ化できません。Apple Silicon でレガシーを動かす場合は x86_64 Node（Rosetta 2）で実行します（`arch -x86_64 zsh` → Volta/nvm の x86_64 Node 14）。ネイティブ arm64 が必要なら The Boosters（`app/`）を使ってください。
 
 ```bash
-# レガシー本体（Node 14 / Volta 推奨、Apple Silicon は Rosetta 2 / x86_64 Node）
-npm install --legacy-peer-deps
-npm run dev        # Electron 4 で起動
-npm test           # AVA + Jest
+# The Boosters 本体（モダン化中: Node 22 / pnpm / Electron 42・arm64 ネイティブへ移行）
+pnpm install       # Volta が Node 22 を自動選択。postinstall で Electron 42(arm64) 取得
+pnpm dev           # webpack ビルド + Electron 42 起動
+pnpm test          # AVA + Jest
 npm run lint       # ESLint
 
 # モダンアプリ（Node 22）
