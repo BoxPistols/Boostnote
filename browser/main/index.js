@@ -97,7 +97,7 @@ function notify(...args) {
 }
 
 function updateApp() {
-  const index = dialog.showMessageBox(remote.getCurrentWindow(), {
+  const index = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
     type: 'warning',
     message: i18n.__('Update Boostnote'),
     detail: i18n.__('New Boostnote is ready to be installed.'),
@@ -110,7 +110,7 @@ function updateApp() {
 }
 
 function downloadUpdate() {
-  const index = dialog.showMessageBox(remote.getCurrentWindow(), {
+  const index = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
     type: 'warning',
     message: i18n.__('Update Boostnote'),
     detail: i18n.__('New Boostnote is ready to be downloaded.'),

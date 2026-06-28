@@ -47,7 +47,7 @@ class StorageItem extends React.Component {
   }
 
   handleUnlinkButtonClick(e) {
-    const index = dialog.showMessageBox(remote.getCurrentWindow(), {
+    const index = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
       type: 'warning',
       message: i18n.__('Unlink Storage'),
       detail: i18n.__(

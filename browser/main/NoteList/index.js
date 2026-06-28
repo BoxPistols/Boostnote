@@ -609,7 +609,7 @@ class NoteList extends React.Component {
 
     const targetIndex = this.getTargetIndex()
     if (this.notes[targetIndex].type === 'SNIPPET_NOTE') {
-      dialog.showMessageBox(remote.getCurrentWindow(), {
+      dialog.showMessageBoxSync(remote.getCurrentWindow(), {
         type: 'warning',
         message: i18n.__('Sorry!'),
         detail: i18n.__(
@@ -652,7 +652,7 @@ class NoteList extends React.Component {
         dataApi
           .exportNoteAs(note, filename, fileType, config)
           .then(res => {
-            dialog.showMessageBox(remote.getCurrentWindow(), {
+            dialog.showMessageBoxSync(remote.getCurrentWindow(), {
               type: 'info',
               message: `Exported to ${filename}`
             })
@@ -1039,11 +1039,11 @@ class NoteList extends React.Component {
       detail: i18n.__('Check and update your blog setting and try again.'),
       buttons: [i18n.__('Confirm')]
     }
-    dialog.showMessageBox(remote.getCurrentWindow(), alertError)
+    dialog.showMessageBoxSync(remote.getCurrentWindow(), alertError)
   }
 
   confirmPublish(note) {
-    const buttonIndex = dialog.showMessageBox(remote.getCurrentWindow(), {
+    const buttonIndex = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
       type: 'warning',
       message: i18n.__('Publish Succeeded'),
       detail: `${note.title} is published at ${note.blog.blogLink}`,
@@ -1163,7 +1163,7 @@ class NoteList extends React.Component {
   }
 
   showMessageBox(message) {
-    dialog.showMessageBox(remote.getCurrentWindow(), {
+    dialog.showMessageBoxSync(remote.getCurrentWindow(), {
       type: 'warning',
       message: message,
       buttons: [i18n.__('OK')]

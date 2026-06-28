@@ -12,7 +12,7 @@ export function confirmDeleteNote(confirmDeletion, permanent) {
       buttons: [i18n.__('Confirm'), i18n.__('Cancel')]
     }
 
-    const dialogButtonIndex = dialog.showMessageBox(
+    const dialogButtonIndex = dialog.showMessageBoxSync(
       remote.getCurrentWindow(),
       alertConfig
     )

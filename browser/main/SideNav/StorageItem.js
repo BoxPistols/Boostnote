@@ -71,7 +71,7 @@ class StorageItem extends React.Component {
   }
 
   handleUnlinkStorageClick(e) {
-    const index = dialog.showMessageBox(remote.getCurrentWindow(), {
+    const index = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
       type: 'warning',
       message: i18n.__('Unlink Storage'),
       detail: i18n.__(
@@ -109,7 +109,7 @@ class StorageItem extends React.Component {
         dataApi
           .exportStorage(storage.key, fileType, paths[0], config)
           .then(data => {
-            dialog.showMessageBox(remote.getCurrentWindow(), {
+            dialog.showMessageBoxSync(remote.getCurrentWindow(), {
               type: 'info',
               message: `Exported to ${paths[0]}`
             })
@@ -236,7 +236,7 @@ class StorageItem extends React.Component {
         dataApi
           .exportFolder(storage.key, folder.key, fileType, paths[0], config)
           .then(data => {
-            dialog.showMessageBox(remote.getCurrentWindow(), {
+            dialog.showMessageBoxSync(remote.getCurrentWindow(), {
               type: 'info',
               message: `Exported to ${paths[0]}`
             })
@@ -260,7 +260,7 @@ class StorageItem extends React.Component {
   }
 
   handleFolderDeleteClick(e, folder) {
-    const index = dialog.showMessageBox(remote.getCurrentWindow(), {
+    const index = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
       type: 'warning',
       message: i18n.__('Delete Folder'),
       detail: i18n.__(

@@ -66,7 +66,7 @@ class PluginsTab extends React.Component {
         ),
         buttons: [i18n.__('OK')]
       }
-      dialog.showMessageBox(remote.getCurrentWindow(), alertConfig)
+      dialog.showMessageBoxSync(remote.getCurrentWindow(), alertConfig)
     } else {
       this.setState({
         wakatimePluginAlert: null

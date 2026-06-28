@@ -97,7 +97,7 @@ class NewNoteButton extends React.Component {
   }
 
   showMessageBox(message) {
-    dialog.showMessageBox(remote.getCurrentWindow(), {
+    dialog.showMessageBoxSync(remote.getCurrentWindow(), {
       type: 'warning',
       message: message,
       buttons: ['OK']

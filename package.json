@@ -13,14 +13,14 @@
     "jest": "jest",
     "fix": "eslint . --fix",
     "lint": "eslint .",
-    "dev": "cross-env NODE_ENV=development node dev-scripts/dev.js",
-    "watch": "webpack-dev-server --hot"
+    "dev": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider node dev-scripts/dev.js",
+    "watch": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --hot"
   },
   "config": {
-    "electron-version": "4.2.12"
+    "electron-version": "42.5.0"
   },
   "engines": {
-    "node": ">=14.0.0 <17.0.0"
+    "node": ">=18.0.0"
   },
   "repository": {
     "type": "git",
@@ -227,6 +227,6 @@
     }
   },
   "volta": {
-    "node": "14.21.3"
+    "node": "22.22.3"
   }
 }

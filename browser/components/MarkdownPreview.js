@@ -219,7 +219,7 @@ class MarkdownPreview extends React.Component {
 
         exportNote(storagePath, note, filename, contentFormatter)
           .then(res => {
-            dialog.showMessageBox(remote.getCurrentWindow(), {
+            dialog.showMessageBoxSync(remote.getCurrentWindow(), {
               type: 'info',
               message: `Exported to ${filename}`,
               buttons: [i18n.__('Ok')]
