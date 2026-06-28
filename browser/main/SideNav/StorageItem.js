@@ -13,7 +13,7 @@ import i18n from 'browser/lib/i18n'
 import context from 'browser/lib/context'
 import { push } from 'connected-react-router'
 
-const { remote } = require('electron')
+const remote = require('@electron/remote')
 const { dialog } = remote
 const escapeStringRegexp = require('escape-string-regexp')
 const path = require('path')

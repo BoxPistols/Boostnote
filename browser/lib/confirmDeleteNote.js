@@ -1,6 +1,6 @@
 import electron from 'electron'
 import i18n from 'browser/lib/i18n'
-const { remote } = electron
+const remote = require('@electron/remote')
 const { dialog } = remote
 
 export function confirmDeleteNote(confirmDeletion, permanent) {

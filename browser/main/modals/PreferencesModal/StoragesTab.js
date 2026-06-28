@@ -10,7 +10,8 @@ import { humanFileSize } from 'browser/lib/utils'
 import fs from 'fs'
 
 const electron = require('electron')
-const { shell, remote } = electron
+const { shell } = electron
+const remote = require('@electron/remote')
 
 function browseFolder() {
   const dialog = remote.dialog

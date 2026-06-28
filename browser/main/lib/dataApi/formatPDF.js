@@ -1,5 +1,5 @@
 import formatHTML from './formatHTML'
-import { remote } from 'electron'
+import remote from '@electron/remote'
 
 export default function formatPDF(props) {
   return function(note, targetPath, exportTasks) {

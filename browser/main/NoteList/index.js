@@ -24,7 +24,7 @@ import context from 'browser/lib/context'
 import filenamify from 'filenamify'
 import queryString from 'query-string'
 
-const { remote } = require('electron')
+const remote = require('@electron/remote')
 const { dialog } = remote
 const WP_POST_PATH = '/wp/v2/posts'
 
@@ -1031,7 +1031,7 @@ class NoteList extends React.Component {
   }
 
   confirmPublishError() {
-    const { remote } = electron
+    const remote = require('@electron/remote')
     const { dialog } = remote
     const alertError = {
       type: 'warning',

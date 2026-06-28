@@ -8,7 +8,8 @@ import context from 'browser/lib/context'
 import EventEmitter from 'browser/main/lib/eventEmitter'
 
 const electron = require('electron')
-const { remote, ipcRenderer } = electron
+const { ipcRenderer } = electron
+const remote = require('@electron/remote')
 const { dialog } = remote
 
 const zoomOptions = [

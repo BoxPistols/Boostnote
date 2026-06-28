@@ -16,7 +16,8 @@ import ConfigManager from './lib/ConfigManager'
 
 const electron = require('electron')
 
-const { remote, ipcRenderer } = electron
+const { ipcRenderer } = electron
+const remote = require('@electron/remote')
 const { dialog } = remote
 
 document.addEventListener('drop', function(e) {
