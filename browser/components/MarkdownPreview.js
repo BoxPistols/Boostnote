@@ -31,7 +31,7 @@ import yaml from 'js-yaml'
 import i18n from 'browser/lib/i18n'
 import path from 'path'
 import { shell } from 'electron'
-import remote from '@electron/remote'
+const remote = require('@electron/remote')
 import attachmentManagement from '../main/lib/dataApi/attachmentManagement'
 import filenamify from 'filenamify'
 import { render } from 'react-dom'

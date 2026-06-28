@@ -1,3 +1,6 @@
+// Must be first: aliases the removed electron.remote → @electron/remote before
+// any other module (electron-config, consts, …) reads electron.remote.*.
+import 'browser/lib/remoteShim'
 import { Provider } from 'react-redux'
 import Main from './Main'
 import { store, history } from './store'
