@@ -17,19 +17,17 @@ function browseFolder() {
   const dialog = remote.dialog
 
   const defaultPath = remote.app.getPath('home')
-  return new Promise((resolve, reject) => {
-    dialog.showOpenDialog(
-      {
-        title: i18n.__('Select Directory'),
-        defaultPath,
-        properties: ['openDirectory', 'createDirectory']
-      },
-      function(targetPaths) {
-        if (targetPaths == null) return resolve('')
-        resolve(targetPaths[0])
-      }
-    )
-  })
+  // Electron 6+: showOpenDialog returns a Promise<{canceled, filePaths}>.
+  return dialog
+    .showOpenDialog({
+      title: i18n.__('Select Directory'),
+      defaultPath,
+      properties: ['openDirectory', 'createDirectory']
+    })
+    .then(({ canceled, filePaths }) => {
+      if (canceled || !filePaths || filePaths.length === 0) return ''
+      return filePaths[0]
+    })
 }
 
 class StoragesTab extends React.Component {

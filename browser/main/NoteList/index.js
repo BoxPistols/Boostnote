@@ -645,27 +645,30 @@ class NoteList extends React.Component {
       properties: ['openFile', 'createDirectory']
     }
 
-    dialog.showSaveDialog(remote.getCurrentWindow(), options, filename => {
-      if (filename) {
-        const { config } = this.props
+    dialog
+      .showSaveDialog(remote.getCurrentWindow(), options)
+      .then(({ canceled, filePath }) => {
+        const filename = filePath
+        if (!canceled && filename) {
+          const { config } = this.props
 
-        dataApi
-          .exportNoteAs(note, filename, fileType, config)
-          .then(res => {
-            dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-              type: 'info',
-              message: `Exported to ${filename}`
+          dataApi
+            .exportNoteAs(note, filename, fileType, config)
+            .then(res => {
+              dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+                type: 'info',
+                message: `Exported to ${filename}`
+              })
             })
-          })
-          .catch(err => {
-            dialog.showErrorBox(
-              'Export error',
-              err ? err.message || err : 'Unexpected error during export'
-            )
-            throw err
-          })
-      }
-    })
+            .catch(err => {
+              dialog.showErrorBox(
+                'Export error',
+                err ? err.message || err : 'Unexpected error during export'
+              )
+              throw err
+            })
+        }
+      })
   }
 
   handleNoteContextMenu(e, uniqueKey) {
@@ -1066,9 +1069,11 @@ class NoteList extends React.Component {
       properties: ['openFile', 'multiSelections']
     }
 
-    dialog.showOpenDialog(remote.getCurrentWindow(), options, filepaths => {
-      this.addNotesFromFiles(filepaths)
-    })
+    dialog
+      .showOpenDialog(remote.getCurrentWindow(), options)
+      .then(({ canceled, filePaths }) => {
+        if (!canceled) this.addNotesFromFiles(filePaths)
+      })
   }
 
   handleDrop(e) {

@@ -103,32 +103,37 @@ class StorageItem extends React.Component {
       title: i18n.__('Select a folder to export the files to'),
       multiSelections: false
     }
-    dialog.showOpenDialog(remote.getCurrentWindow(), options, paths => {
-      if (paths && paths.length === 1) {
-        const { storage, dispatch, config } = this.props
-        dataApi
-          .exportStorage(storage.key, fileType, paths[0], config)
-          .then(data => {
-            dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-              type: 'info',
-              message: `Exported to ${paths[0]}`
-            })
+    dialog
+      .showOpenDialog(remote.getCurrentWindow(), options)
+      .then(({ canceled, filePaths }) => {
+        const paths = filePaths
+        if (!canceled && paths && paths.length === 1) {
+          const { storage, dispatch, config } = this.props
+          dataApi
+            .exportStorage(storage.key, fileType, paths[0], config)
+            .then(data => {
+              dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+                type: 'info',
+                message: `Exported to ${paths[0]}`
+              })
 
-            dispatch({
-              type: 'EXPORT_STORAGE',
-              storage: data.storage,
-              fileType: data.fileType
+              dispatch({
+                type: 'EXPORT_STORAGE',
+                storage: data.storage,
+                fileType: data.fileType
+              })
             })
-          })
-          .catch(error => {
-            dialog.showErrorBox(
-              'Export error',
-              error ? error.message || error : 'Unexpected error during export'
-            )
-            throw error
-          })
-      }
-    })
+            .catch(error => {
+              dialog.showErrorBox(
+                'Export error',
+                error
+                  ? error.message || error
+                  : 'Unexpected error during export'
+              )
+              throw error
+            })
+        }
+      })
   }
 
   handleToggleButtonClick(e) {
@@ -230,33 +235,38 @@ class StorageItem extends React.Component {
       title: i18n.__('Select a folder to export the files to'),
       multiSelections: false
     }
-    dialog.showOpenDialog(remote.getCurrentWindow(), options, paths => {
-      if (paths && paths.length === 1) {
-        const { storage, dispatch, config } = this.props
-        dataApi
-          .exportFolder(storage.key, folder.key, fileType, paths[0], config)
-          .then(data => {
-            dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-              type: 'info',
-              message: `Exported to ${paths[0]}`
-            })
+    dialog
+      .showOpenDialog(remote.getCurrentWindow(), options)
+      .then(({ canceled, filePaths }) => {
+        const paths = filePaths
+        if (!canceled && paths && paths.length === 1) {
+          const { storage, dispatch, config } = this.props
+          dataApi
+            .exportFolder(storage.key, folder.key, fileType, paths[0], config)
+            .then(data => {
+              dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+                type: 'info',
+                message: `Exported to ${paths[0]}`
+              })
 
-            dispatch({
-              type: 'EXPORT_FOLDER',
-              storage: data.storage,
-              folderKey: data.folderKey,
-              fileType: data.fileType
+              dispatch({
+                type: 'EXPORT_FOLDER',
+                storage: data.storage,
+                folderKey: data.folderKey,
+                fileType: data.fileType
+              })
             })
-          })
-          .catch(error => {
-            dialog.showErrorBox(
-              'Export error',
-              error ? error.message || error : 'Unexpected error during export'
-            )
-            throw error
-          })
-      }
-    })
+            .catch(error => {
+              dialog.showErrorBox(
+                'Export error',
+                error
+                  ? error.message || error
+                  : 'Unexpected error during export'
+              )
+              throw error
+            })
+        }
+      })
   }
 
   handleFolderDeleteClick(e, folder) {
