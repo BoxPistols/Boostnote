@@ -1,7 +1,7 @@
 import i18n from 'browser/lib/i18n'
 import fs from 'fs'
 
-const { remote } = require('electron')
+const remote = require('@electron/remote')
 const { Menu } = remote.require('electron')
 const { clipboard } = remote.require('electron')
 const { shell } = remote.require('electron')

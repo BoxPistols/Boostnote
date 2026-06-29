@@ -1,17 +1,17 @@
 let menuBuilderParameter
-jest.mock('electron', () => {
+// contextMenuBuilder now uses `require('@electron/remote').require('electron')`
+// (electron.remote was removed), so mock @electron/remote, not electron.
+jest.mock('@electron/remote', () => {
   return {
-    remote: {
-      require: jest.fn(() => {
-        return {
-          Menu: {
-            buildFromTemplate: jest.fn(param => {
-              menuBuilderParameter = param
-            })
-          }
+    require: jest.fn(() => {
+      return {
+        Menu: {
+          buildFromTemplate: jest.fn(param => {
+            menuBuilderParameter = param
+          })
         }
-      })
-    }
+      }
+    })
   }
 })
 
